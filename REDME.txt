@@ -1,1 +1,5 @@
 This is web project, based on JAVA for private smartHome.
+=========
+
+some notes:
+./webControls folder should be copied to the "C:\"
