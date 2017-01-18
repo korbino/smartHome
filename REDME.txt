@@ -1,0 +1,1 @@
+This is web project, based on JAVA for private smartHome.
