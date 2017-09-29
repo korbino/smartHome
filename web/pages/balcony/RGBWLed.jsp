@@ -28,6 +28,12 @@
 
 <%--JavaScript functions--%>
     <script type="text/javascript">
+        //Sleep function
+        function sleep(ms) {
+            ms += new Date().getTime()
+            while (new Date() < ms){}
+        }
+
         function goToHomePage() {
             location.replace("./")
         }
@@ -95,7 +101,7 @@
                     ledModeValue: ledMode
                 },
                 function(data, status){
-//                    alert("ESP status: " + status + "\nESP response: " + data + "\nledMode: " + ledMode);
+                    //alert("ESP status: " + status + "\nESP response: " + data + "\nledMode: " + ledMode);
                     if (status == "success" && ledMode == "red"){
                         $("#currentStatus").css("background-color", "#ff8080").html("<h2>Current Mode is RED!!!</h2>");
                     }if (status == "success" && ledMode == "green"){
@@ -128,18 +134,53 @@
             showCurrentBrightnessState();
 
             $("#setRedColorModeButton").click(function () {
-              setLedMode("red");
+                $.get("http://192.168.1.104",
+                    {
+                        color : "red"
+                    },
+                    function(data, status){
+                        alert (data + status)
+                    });
+                setLedMode("red");
             })
             $("#setGreenColorModeButton").click(function () {
+                $.get("http://192.168.1.104",
+                    {
+                        color : "green"
+                    },
+                    function(data, status){
+                        alert (data + status)
+                    });
                 setLedMode("green");
             })
             $("#setBlueColorModeButton").click(function () {
+                $.get("http://192.168.1.104",
+                    {
+                        color : "blue"
+                    },
+                    function(data, status){
+                        alert (data + status)
+                    });
                 setLedMode("blue");
             })
             $("#setWhiteColorModeButton").click(function () {
+                $.get("http://192.168.1.104",
+                    {
+                        color : "white"
+                    },
+                    function(data, status){
+                        alert (data + status)
+                    });
                 setLedMode("white");
             })
             $("#setSwitchOff").click(function () {
+                $.get("http://192.168.1.104",
+                    {
+                        color : "none"
+                    },
+                    function(data, status){
+                        alert (data + status)
+                    });
                 setLedMode("switchoff");
             })
             $("#setGerlandModeButton").click(function () {
@@ -234,6 +275,23 @@
                         $("#brightnessMiddle").css("background-color", "lightgray");
                         $("#brightnessLow").css("background-color", "yellow");
                     });
+            });
+            $("#testESPButtonON").click(function () {
+                $.get("http://192.168.1.104/?val=100",
+                    {
+                    },
+                    function(data, status){
+                    alert (data + status)
+                    });
+            })
+            $("#testESPButtonOFF").click(function(){
+                $.get("http://192.168.1.104",
+                    {
+                        val : "0"
+                    },
+                    function(data, status){
+                    });
+                sleep(400);
             });
         })
     </script>
@@ -347,7 +405,12 @@
             <br><div style="text-align: center" id="setRelaxModeButton">
                     <button class="button" style="background-color: darkviolet;">Relax</button>
             </div><br>
-
+            <br><div style="text-align: center" id="testESPButtonON">
+            <button class="button" style="background-color: darkviolet;">ESP_Light_ON</button>
+            </div><br>
+            <br><div style="text-align: center" id="testESPButtonOFF">
+            <button class="button" style="background-color: darkviolet;">ESP_ Light_OFF</button>
+        </div><br>
         </td>
     </tr>
     <tr>

@@ -6,7 +6,7 @@
         <fileTransfer port="0" mountedRoot="D:\_my_backup\Drop_Box\Dropbox\apache-tomcat-7.0.72\webapps\smartHome" accessType="MOUNT" />
       </webServer>
       <webServer id="6669a4ab-92a0-4aaa-adbf-ed4b20400c97" name="Home" url="http://localhost">
-        <fileTransfer port="0" mountedRoot="E:\Dropbox\Dropbox\apache-tomcat-7.0.72\webapps\smartHome" accessType="MOUNT" />
+        <fileTransfer port="0" mountedRoot="D:\Dropbox\apache-tomcat-7.0.72\webapps\smartHome" accessType="MOUNT" />
       </webServer>
     </option>
   </component>
