@@ -88,6 +88,13 @@
                 }
             );
         }
+        function sendRequestToBalconyESPForBrightnessUpdate(){
+            $.get("http://192.168.1.104", { updateBrightness:"true"});
+        }
+
+        function sendRequestToBalconyESPForStartingGerlandMode(){
+            $.get("http://192.168.1.104", { gerland:"start"});
+        }
 
 
         /**
@@ -103,19 +110,19 @@
                 function(data, status){
                     //alert("ESP status: " + status + "\nESP response: " + data + "\nledMode: " + ledMode);
                     if (status == "success" && ledMode == "red"){
-                        $("#currentStatus").css("background-color", "#ff8080").html("<h2>Current Mode is RED!!!</h2>");
+                        $("#currentStatus").css("background-color", "#ff8080").html("<h1>Current Mode is RED!!!</h1>");
                     }if (status == "success" && ledMode == "green"){
-                        $("#currentStatus").css("background-color", "#80ff80").html("<h2>Current Mode is GREEN!!!</h2>");
+                        $("#currentStatus").css("background-color", "#80ff80").html("<h1>Current Mode is GREEN!!!</h1>");
                     }if (status == "success" && ledMode == "blue"){
-                        $("#currentStatus").css("background-color", "#33adff").html("<h2>Current Mode is BLUE!!!</h2>");
+                        $("#currentStatus").css("background-color", "#33adff").html("<h1>Current Mode is BLUE!!!</h1>");
                     }if (status == "success" && ledMode == "white"){
-                        $("#currentStatus").css("background-color", "#ffff99").html("<h2>Current Mode is WHITE!!!</h2>");
+                        $("#currentStatus").css("background-color", "#ffff99").html("<h1>Current Mode is WHITE!!!</h1>");
                     }if (status == "success" && ledMode == "switchoff"){
-                        $("#currentStatus").css("background-color", "#999999").html("<h2>Current Mode is SWITCH OFF!!!</h2>");
+                        $("#currentStatus").css("background-color", "#999999").html("<h1>Current Mode is SWITCH OFF!!!</h1>");
                     }if (status == "success" && ledMode == "gerland"){
-                        $("#currentStatus").css("background-color", "#c266ff").html("<h2>Current Mode is GERLAND!!!</h2>");
+                        $("#currentStatus").css("background-color", "#c266ff").html("<h1>Current Mode is GERLAND!!!</h1>");
                     }if (status == "success" && ledMode == "relax"){
-                        $("#currentStatus").css("background-color", "#c266ff").html("<h2>Current Mode is RELAX!!!</h2>");
+                        $("#currentStatus").css("background-color", "#c266ff").html("<h1>Current Mode is RELAX!!!</h1>");
                     }
 
                     if (status != "success"){
@@ -185,10 +192,11 @@
             })
             $("#setGerlandModeButton").click(function () {
                 setLedMode("gerland");
+                sendRequestToBalconyESPForStartingGerlandMode();
             })
-            $("#setRelaxModeButton").click(function () {
-                setLedMode("relax");
-            })
+//            $("#setRelaxModeButton").click(function () {
+//                setLedMode("relax");
+//            })
             $("#options").click(function(){
                 $("#panel").slideToggle("slow");
             });
@@ -235,6 +243,7 @@
                     });
             });
             $("#brightnessHigh").click(function(){
+                sendRequestToBalconyESPForBrightnessUpdate();
                 $.get("./options",
                     {
                         optionName : "Brightness",
@@ -249,6 +258,7 @@
                     });
             });
             $("#brightnessMiddle").click(function(){
+                sendRequestToBalconyESPForBrightnessUpdate();
                 $.get("./options",
                     {
                         optionName : "Brightness",
@@ -263,6 +273,7 @@
                     });
             });
             $("#brightnessLow").click(function(){
+                sendRequestToBalconyESPForBrightnessUpdate();
                 $.get("./options",
                     {
                         optionName : "Brightness",
@@ -276,23 +287,23 @@
                         $("#brightnessLow").css("background-color", "yellow");
                     });
             });
-            $("#testESPButtonON").click(function () {
-                $.get("http://192.168.1.104/?val=100",
-                    {
-                    },
-                    function(data, status){
-                    alert (data + status)
-                    });
-            })
-            $("#testESPButtonOFF").click(function(){
-                $.get("http://192.168.1.104",
-                    {
-                        val : "0"
-                    },
-                    function(data, status){
-                    });
-                sleep(400);
-            });
+//            $("#testESPButtonON").click(function () {
+//                $.get("http://192.168.1.104/?val=100",
+//                    {
+//                    },
+//                    function(data, status){
+//                    alert (data + status)
+//                    });
+//            })
+//            $("#testESPButtonOFF").click(function(){
+//                $.get("http://192.168.1.104",
+//                    {
+//                        val : "0"
+//                    },
+//                    function(data, status){
+//                    });
+//                sleep(400);
+//            });
         })
     </script>
 </head>
@@ -402,14 +413,14 @@
             <br><div style="text-align: center" id="setGerlandModeButton">
                     <button class="button" style="background-color: darkviolet;">Gerland</button>
             </div><br>
-            <br><div style="text-align: center" id="setRelaxModeButton">
-                    <button class="button" style="background-color: darkviolet;">Relax</button>
-            </div><br>
-            <br><div style="text-align: center" id="testESPButtonON">
-            <button class="button" style="background-color: darkviolet;">ESP_Light_ON</button>
-            </div><br>
-            <br><div style="text-align: center" id="testESPButtonOFF">
-            <button class="button" style="background-color: darkviolet;">ESP_ Light_OFF</button>
+            <%--<br><div style="text-align: center" id="setRelaxModeButton">--%>
+                    <%--<button class="button" style="background-color: darkviolet;">Relax</button>--%>
+            <%--</div><br>--%>
+            <%--<br><div style="text-align: center" id="testESPButtonON">--%>
+            <%--<button class="button" style="background-color: darkviolet;">ESP_Light_ON</button>--%>
+            <%--</div><br>--%>
+            <%--<br><div style="text-align: center" id="testESPButtonOFF">--%>
+            <%--<button class="button" style="background-color: darkviolet;">ESP_ Light_OFF</button>--%>
         </div><br>
         </td>
     </tr>
